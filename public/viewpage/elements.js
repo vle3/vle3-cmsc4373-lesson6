@@ -1,3 +1,5 @@
+export const root = document.getElementById('root');
+
 export const MENU = {
     SignIn: document.getElementById('menu-signin'),
     Home: document.getElementById('menu-home'),
@@ -5,6 +7,7 @@ export const MENU = {
     SignOut: document.getElementById('menu-signout'),
     Cart: document.getElementById('menu-cart'),
     Profile: document.getElementById('menu-profile'),
+    CartItemCount: document.getElementById('menu-cart-item-count'),
 }
 
 export const formSignIn = document.getElementById('form-signin');
