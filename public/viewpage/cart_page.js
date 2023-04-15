@@ -5,6 +5,7 @@ import { currentUser } from '../controller/firebase_auth.js';
 import { currency, disabledButton, enabledButton, info } from './util.js';
 import { home_page } from './home_page.js';
 import { DEV } from '../model/constants.js';
+import { checkout } from '../controller/firestore_controller.js';
 
 export function addEventListeners() {
     MENU.Cart.addEventListener('click', async () => {
@@ -82,7 +83,7 @@ export async function cart_page() {
         const label = disabledButton(checkoutButton);
         try {
             //charging is done!
-            //save to firebase (await)
+            await checkout(cart);
             info('Success!' , 'Checkout Complete!');
             cart.clear();
             MENU.CartItemCount.innerHTML = 0;

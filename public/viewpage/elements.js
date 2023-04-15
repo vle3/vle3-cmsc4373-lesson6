@@ -18,5 +18,11 @@ export const modalInfobox = {
     body: document.getElementById('modal-infobox-body'),
 }
 
+export const modalTransaction = {
+    modal: new bootstrap.Modal(document.getElementById('modal-transaction'), {backdrop: 'static'}),
+    title: document.getElementById('modal-transaction-title'),
+    body: document.getElementById('modal-transaction-body'),
+}
+
 //modal
 export const modalSignin = new bootstrap.Modal(document.getElementById('modal-signin'), { backdrop: 'static' });

@@ -1,3 +1,5 @@
+import { Product } from "./product.js";
+
 export class ShoppingCart {
     constructor(uid) {
         this.uid = uid;
@@ -40,7 +42,21 @@ export class ShoppingCart {
         return total;
     }
 
-    clear(){
+    clear() {
         this.items.length = 0;
+    }
+
+    serialize(timestamp) {
+        const serializedItems = this.items.map(e => e.serialize());
+        return { uid: this.uid, items: serializedItems, timestamp };
+    }
+
+    static deserialize(data) {
+        const sc = new ShoppingCart(data.uid);
+        if (data.items && Array.isArray(data.items)) {
+            sc.items = data.items.map(e => new Product(e));
+        }
+        sc.timestamp = data.timestamp;
+        return sc;
     }
 }

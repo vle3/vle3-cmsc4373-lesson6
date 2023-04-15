@@ -37,8 +37,8 @@
         </ul>
         <button id="menu-cart" class="btn btn-outline-success modal-postauth">
           <img src="images/cart.jpg" width="30px"> (<span id="menu-cart-item-count">0</span>)
-        </a>
-        <button id="menu-profile" class="btn btn-outline-success modal-postauth">Profile</a>
+          </a>
+          <button id="menu-profile" class="btn btn-outline-success modal-postauth">Profile</a>
       </div>
     </div>
   </nav>
@@ -84,6 +84,23 @@
               <button class="btn btn-outline-primary" type="submit">Sign In</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Transaction - purchase history -->
+  <div class="modal fade" id="modal-transaction" data-bs-backdrop="static" 
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-transaction-title" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-transaction-title"></h5>
+        </div>
+        <div class="modal-body" id="modal-transaction-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

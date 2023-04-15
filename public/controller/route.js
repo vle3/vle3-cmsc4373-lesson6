@@ -1,5 +1,5 @@
 import { home_page } from "../viewpage/home_page.js"; 
-import { purchases_page } from "../viewpage/purchases.js"; 
+import { purchases_page } from "../viewpage/purchases_page.js"; 
 import { cart_page } from "../viewpage/cart_page.js"; 
 import { profile_page } from "../viewpage/profile_page.js"; 
 
