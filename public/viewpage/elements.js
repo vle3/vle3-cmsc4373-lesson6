@@ -25,4 +25,13 @@ export const modalTransaction = {
 }
 
 //modal
-export const modalSignin = new bootstrap.Modal(document.getElementById('modal-signin'), { backdrop: 'static' });
+export const modalSignin = {
+    modal: new bootstrap.Modal(document.getElementById('modal-signin'), { backdrop: 'static' }),
+    form: document.getElementById('form-signin'),
+    showSignupModal: document.getElementById('button-show-signup-modal'),
+} 
+
+export const modalSignup = {
+    modal: new bootstrap.Modal(document.getElementById('modal-signup'), { backdrop: 'static' }),
+    form: document.getElementById('modal-signup-form'),
+} 

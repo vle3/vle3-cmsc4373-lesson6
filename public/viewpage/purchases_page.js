@@ -59,7 +59,7 @@ export async function purchases_page() {
                         <input type="hidden" name="index" value="${i}">
                         <button type="submit" class="btn btn-outline-primary">Details</button>
                     </form>
-                <td>
+                </td>
                 <td>${carts[i].getTotalQty()}</td>
                 <td>${Util.currency(carts[i].getTotalPrice())}</td>
                 <td>${new Date(carts[i].timestamp).toString()}</td>
@@ -72,13 +72,49 @@ export async function purchases_page() {
     root.innerHTML = html;
 
     const detailsForm = document.getElementsByClassName('form-purchase-details');
-    for(let i = 0; i < detailsForm.length; i++){
+    for (let i = 0; i < detailsForm.length; i++) {
         detailsForm[i].addEventListener('submit', e => {
             e.preventDefault();
             const index = e.target.index.value;
             modalTransaction.title.innerHTML = `Purchased At: ${new Date(carts[index].timestamp).toString()}`;
-            modalTransaction.body.innerHTML = `qty: ${carts[index].getTotalQty()} total: ${carts[index].getTotalPrice()}`;
-            modalTransaction.modal.show() ;
+            modalTransaction.body.innerHTML = buildTransactionView(carts[index]);
+            modalTransaction.modal.show();
         });
     }
+}
+
+function buildTransactionView(cart) {
+    let html = `
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Sub-total</th>
+        <th scope="col" width="50%">Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+    `;
+
+    cart.items.forEach(p => {
+        html += `
+            <tr>
+                <td><img src="${p.imageURL}" width=150px></td>
+                <td>${p.name}</td>
+                <td>${Util.currency(p.price)}</td>
+                <td>${p.qty}</td>
+                <td>${Util.currency(p.price * p.qty)}</td>
+                <td>${p.summary}</td>
+            </tr>
+        `;
+    });
+
+    html += '</tbody></table>';
+    html += `
+        <div class="fs-3">Total: ${Util.currency(cart.getTotalPrice())}</div>
+    `;
+    return html;
 }

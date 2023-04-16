@@ -4,14 +4,19 @@ import {
     collection,
     orderBy,
     getDocs,
+    getDoc,
     addDoc,
+    setDoc,
     where,
+    doc,
+    updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
 
 import { COLLECTION_NAMES } from "../model/constants.js";
 import { Product } from "../model/product.js";
 import { ShoppingCart } from "../model/shopping_cart.js";
 import { cart } from "../viewpage/cart_page.js";
+import { AccountInfo } from "../model/account_info.js";
 
 const db = getFirestore();
 
@@ -46,4 +51,23 @@ export async function getPurchaseHistory(uid) {
         cart.push(sc);
     });
     return cart;
+}
+
+export async function getAccountInfo(uid) {
+    const docRef = doc(db, COLLECTION_NAMES.ACCOUNT_INFO, uid);
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()){
+        return new AccountInfo(docSnap.data());
+    } else {
+        const defaultInfo = AccountInfo.instance();
+        const accountDocRef = doc(db, COLLECTION_NAMES.ACCOUNT_INFO, uid);
+        await setDoc(accountDocRef, defaultInfo.serialize());
+        return defaultInfo;
+    }
+}
+
+export async function updateAccountInfo(uid, updateInfo) {
+    //updateInfo = {key: value}
+    const docRef = doc(db, COLLECTION_NAMES.ACCOUNT_INFO, uid);
+    await updateDoc(docRef, updateInfo);
 }
